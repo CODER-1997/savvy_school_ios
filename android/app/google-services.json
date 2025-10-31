@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "595924763103",
+    "project_id": "sawyschool",
+    "storage_bucket": "sawyschool.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595924763103:android:ee365e5c3a53a5ae1cc46a",
+        "android_client_info": {
+          "package_name": "com.example.karmana_markaz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHDFcjkTHfAdJU1lEGjXQ33D-wiC1D2iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595924763103:android:c60d842c7c3765a21cc46a",
+        "android_client_info": {
+          "package_name": "com.example.savvy_school_ios"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHDFcjkTHfAdJU1lEGjXQ33D-wiC1D2iw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
