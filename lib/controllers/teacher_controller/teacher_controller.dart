@@ -28,7 +28,7 @@ class TeacherController extends GetxController {
       try {
         // Retrieve the document reference
         DocumentReference documentReference = FirebaseFirestore.instance
-            .collection('LinguistaTeachers')
+            .collection('MarkazTeachers')
             .doc(documentId);
 
         // Get the current document snapshot
@@ -94,7 +94,7 @@ class TeacherController extends GetxController {
     try {
       // Retrieve the document reference
       DocumentReference documentReference = FirebaseFirestore.instance
-          .collection('LinguistaTeachers')
+          .collection('MarkazTeachers')
           .doc(documentId);
 
       // Get the current document snapshot

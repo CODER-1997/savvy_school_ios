@@ -59,7 +59,7 @@ class MyHomePage extends StatelessWidget {
       body: Container(
         child: box.read('isLogged') == null
             ? box.read('isIntroduced') == null ?IntroScreen():  Login()
-            : (box.read('isLogged') == 'Linguista9' ? AdminHomeScreen():HomeScreen()),
+            : (box.read('isLogged') == 'Savvy' ? AdminHomeScreen():HomeScreen()),
       ),
     );
   }

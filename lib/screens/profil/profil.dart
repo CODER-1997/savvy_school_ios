@@ -46,7 +46,7 @@ class Profil extends StatelessWidget {
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('LinguistaTeachers')
+            .collection('MarkazTeachers')
             .doc(box.read('teacherDocId'))
             .snapshots(),
         builder: (context, snapshot) {

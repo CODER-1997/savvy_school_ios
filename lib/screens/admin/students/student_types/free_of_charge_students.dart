@@ -34,7 +34,7 @@ class FreeOfChargeds extends StatelessWidget {
               Expanded(
                 child: StreamBuilder(
                     stream:FirebaseFirestore.instance
-                        .collection('LinguistaStudents')
+                        .collection('MarkazStudents')
                         .where('items.isDeleted', isEqualTo: false)
                         .where('items.isFreeOfcharge', isEqualTo: true)
                         .snapshots()

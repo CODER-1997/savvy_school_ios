@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
-
+import 'exams.dart';
 import '../../constants/text_styles.dart';
 import '../../constants/theme.dart';
 import '../../controllers/students/student_controller.dart';
@@ -113,7 +113,7 @@ class _StudentsByGroupState extends State<StudentsByGroup>
                   style: TextStyle(color: Colors.white),
                 )),
             Text(
-              "Oylik to'lovlar",
+              "Imtihonlar",
               style: TextStyle(color: Colors.white),
             ),
 
@@ -152,9 +152,13 @@ class _StudentsByGroupState extends State<StudentsByGroup>
             groupId: widget.groupId,
             groupName: widget.groupName,
           ),
-       StudentByGroupIncomeByMonth(
-         groupId: widget.groupId,
-         groupName: widget.groupName,)
+          Exams(
+            groupId: widget.groupId,
+            group: widget.groupName,
+          ),
+       // StudentByGroupIncomeByMonth(
+       //   groupId: widget.groupId,
+       //   groupName: widget.groupName,)
 
         ],
       )),

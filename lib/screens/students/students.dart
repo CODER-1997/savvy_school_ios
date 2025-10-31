@@ -172,7 +172,7 @@ class _StudentsState extends State<Students> {
                                               for (int i = 0;
                                               i <
                                                   studentController
-                                                      .LinguistaGroups
+                                                      .MarkazGroups
                                                       .length;
                                               i++)
                                                 InkWell(
@@ -181,12 +181,12 @@ class _StudentsState extends State<Students> {
                                                         .selectedGroup
                                                         .value =
                                                     studentController
-                                                        .LinguistaGroups[i]['group_name'];
+                                                        .MarkazGroups[i]['group_name'];
                                                     studentController
                                                         .selectedGroupId
                                                         .value =
                                                     studentController
-                                                        .LinguistaGroups[i]['group_id'];
+                                                        .MarkazGroups[i]['group_id'];
                                                     print(studentController.selectedGroupId.value);
                                                   },
                                                   child: Container(
@@ -199,7 +199,7 @@ class _StudentsState extends State<Students> {
                                                         .selectedGroupId
                                                         .value !=
                                                         studentController
-                                                            .LinguistaGroups[
+                                                            .MarkazGroups[
                                                         i]['group_id']
                                                         ? BoxDecoration(
                                                         borderRadius:
@@ -219,14 +219,14 @@ class _StudentsState extends State<Students> {
                                                             color: Colors.green,
                                                             width: 1)),
                                                     child: Text(
-                                                      "${studentController.LinguistaGroups[i]['group_name']}"
+                                                      "${studentController.MarkazGroups[i]['group_name']}"
                                                       ,
                                                       style: TextStyle(
                                                           color: studentController
                                                               .selectedGroupId
                                                               .value !=
                                                               studentController
-                                                                  .LinguistaGroups[
+                                                                  .MarkazGroups[
                                                               i]['group_id']
                                                               ? Colors.black
                                                               : CupertinoColors
@@ -291,10 +291,10 @@ class _StudentsState extends State<Students> {
                 StreamBuilder(
                     stream: _searchText.isEmpty
                         ? FirebaseFirestore.instance
-                            .collection('LinguistaStudents')
+                            .collection('MarkazStudents')
                             .snapshots()
                         : FirebaseFirestore.instance
-                            .collection('LinguistaStudents')
+                            .collection('MarkazStudents')
                             .where('items.name',
                                 isGreaterThanOrEqualTo: _searchText)
                             .where('items.name',
@@ -548,7 +548,7 @@ class _StudentsState extends State<Students> {
                                                                                 scrollDirection: Axis.horizontal,
                                                                                 child: Row(
                                                                                   children: [
-                                                                                    for (int i = 0; i < studentController.LinguistaGroups.length; i++)
+                                                                                    for (int i = 0; i < studentController.MarkazGroups.length; i++)
 
                                                                                       GestureDetector(
                                                                                         onTap: () {
@@ -557,22 +557,22 @@ class _StudentsState extends State<Students> {
                                                                                               .selectedGroup
                                                                                               .value =
                                                                                           studentController
-                                                                                              .LinguistaGroups[i]['group_name'];
+                                                                                              .MarkazGroups[i]['group_name'];
                                                                                           studentController
                                                                                               .selectedGroupId
                                                                                               .value =
                                                                                           studentController
-                                                                                              .LinguistaGroups[i]['group_id'];
+                                                                                              .MarkazGroups[i]['group_id'];
 
                                                                                           },
                                                                                         child: Container(
                                                                                           padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
                                                                                           margin: EdgeInsets.all(8),
-                                                                                          decoration: studentController.selectedGroupId.value != studentController.LinguistaGroups[i]['group_id']  ?
+                                                                                          decoration: studentController.selectedGroupId.value != studentController.MarkazGroups[i]['group_id']  ?
                                                                                           BoxDecoration(borderRadius: BorderRadius.circular(112), border: Border.all(color: Colors.black, width: 1)) : BoxDecoration(color: Colors.green, borderRadius: BorderRadius.circular(112), border: Border.all(color: Colors.green, width: 1)),
                                                                                           child: Text(
-                                                                                            "${studentController.LinguistaGroups[i]['group_name']}",
-                                                                                            style: TextStyle(color: studentController.selectedGroupId.value != studentController.LinguistaGroups[i]['group_id'] ? Colors.black : CupertinoColors.white),
+                                                                                            "${studentController.MarkazGroups[i]['group_name']}",
+                                                                                            style: TextStyle(color: studentController.selectedGroupId.value != studentController.MarkazGroups[i]['group_id'] ? Colors.black : CupertinoColors.white),
                                                                                           ),
                                                                                         ),
                                                                                       )

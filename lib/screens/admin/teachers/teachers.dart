@@ -48,7 +48,7 @@ class _TeachersState extends State<Teachers> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('LinguistaTeachers')
+            .collection('MarkazTeachers')
             .where('items.isDeleted', isEqualTo: false)
             .snapshots(),
         builder: (context, snapshot) {
@@ -128,7 +128,7 @@ class _TeachersState extends State<Teachers> {
                       IconButton(
                         icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
                         onPressed: () {
-                          if (GetStorage().read('isLogged') == 'Linguista9') {
+                          if (GetStorage().read('isLogged') == 'Savvy') {
                             showDialog(
                               context: context,
                               builder: (_) => CustomAlertDialog(
@@ -242,7 +242,7 @@ class _TeachersState extends State<Teachers> {
                             direction: Axis.vertical,
 
                             children: _buildGroupSelector(
-                              studentController.LinguistaGroups,
+                              studentController.MarkazGroups,
                               teachersController.teacherGroupIds,
                               teachersController.teacherGroups,
                             ),
@@ -343,7 +343,7 @@ class _TeachersState extends State<Teachers> {
                             spacing: 8,
                             runSpacing: 8,
                             children: _buildGroupSelector(
-                              studentController.LinguistaGroups,
+                              studentController.MarkazGroups,
                               teachersController.teacherGroupIdsEdit,
                               teachersController.teacherGroupsEdit,
                             ),

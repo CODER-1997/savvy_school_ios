@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
+ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:savvy_school_ios/screens/admin/groups/groups.dart';
@@ -21,7 +20,7 @@ class AdminHomeScreen extends StatelessWidget {
           body:   Container(
               height: Get.height,
               // padding: EdgeInsets.only(left: 16,right: 16,top: 16),
-              child: box.read('isLogged') == 'Linguista9' || box.read('isLogged') == 'testuser' ? [
+              child: box.read('isLogged') == 'Savvy' || box.read('isLogged') == 'testuser' ? [
                 AdminGroups(),
                 AdminStudents(),
                 Teachers(),
@@ -34,7 +33,7 @@ class AdminHomeScreen extends StatelessWidget {
               ].obs[currentIndex.value],
             ),
 
-          bottomNavigationBar:box.read('isLogged') == 'Linguista9' || box.read('isLogged') == 'testuser'  ? BottomNavigationBar(
+          bottomNavigationBar:box.read('isLogged') == 'Savvy' || box.read('isLogged') == 'testuser'  ? BottomNavigationBar(
 
             backgroundColor: Colors.white,
             selectedItemColor: Colors.blueAccent,
@@ -97,13 +96,20 @@ class AdminHomeScreen extends StatelessWidget {
             },
             items: [
               BottomNavigationBarItem(
-                icon: FaIcon(size: 18, FontAwesomeIcons.rocket),
+                icon: Image.asset(
+                  'assets/icons/ic_main.png',
+                  width: 24,
+                  height: 24,
+                ),
                 label: 'Groups'.tr.capitalizeFirst,
               ),
 
               BottomNavigationBarItem(
-                icon: FaIcon(size: 18, FontAwesomeIcons.peopleGroup),
-                label: 'Students'.tr.capitalizeFirst,
+                icon:Image.asset(
+                  'assets/icons/ic_students.png',
+                  width: 24,
+                  height: 24,
+                ),                label: 'Students'.tr.capitalizeFirst,
               ),
 
 

@@ -49,7 +49,7 @@ class Attendance extends StatelessWidget {
 
             StreamBuilder(
                 stream: FirebaseFirestore.instance
-                    .collection('LinguistaStudents')
+                    .collection('MarkazStudents')
                     .where('items.isDeleted', isEqualTo: false)
                     .where('items.groupId', isEqualTo: groupId)
                     .snapshots(),

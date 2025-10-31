@@ -76,7 +76,7 @@ class _AdminStudentPaymentHistoryState extends State<AdminStudentPaymentHistory>
       body:   SingleChildScrollView(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('LinguistaStudents').where('items.uniqueId',isEqualTo: '${widget.uniqueId}')
+                .collection('MarkazStudents').where('items.uniqueId',isEqualTo: '${widget.uniqueId}')
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -201,7 +201,7 @@ class _AdminStudentPaymentHistoryState extends State<AdminStudentPaymentHistory>
 
                                   disabledColor: Colors.grey,
 
-                                  onPressed:  box.read('isLogged') !='Linguista9'?null: () {
+                                  onPressed:  box.read('isLogged') !='Savvy'?null: () {
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
@@ -294,7 +294,7 @@ class _AdminStudentPaymentHistoryState extends State<AdminStudentPaymentHistory>
                                 IconButton(
                                   tooltip: "Delete payment",
                                   onPressed: () {
-                                    if (box.read('isLogged') == 'Linguista9') {
+                                    if (box.read('isLogged') == 'Savvy') {
                                       showCupertinoDialog(
                                         context: context,
                                         builder: (_) => CupertinoAlertDialog(

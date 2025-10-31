@@ -80,7 +80,7 @@ class StudentByGroupIncomeByMonth extends StatelessWidget {
 
       StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection('LinguistaStudents')
+              .collection('MarkazStudents')
               .where('items.isDeleted', isEqualTo: false)
               .where('items.groupId', isEqualTo: groupId)
               .snapshots(),
@@ -164,7 +164,7 @@ class StudentByGroupIncomeByMonth extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                               box.read('isLogged') !='Linguista9'?"***":     'Income: ${calculateTotalPayments(students, monthList[index])}',
+                               box.read('isLogged') !='Savvy'?"***":     'Income: ${calculateTotalPayments(students, monthList[index])}',
                                     style: TextStyle(
                                       color: Colors.grey.shade600,
                                       fontSize: 13,

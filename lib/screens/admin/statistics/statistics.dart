@@ -75,7 +75,7 @@ class Statistics extends StatelessWidget {
       ),
       child: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('LinguistaStudents').snapshots(),
+          stream: FirebaseFirestore.instance.collection('MarkazStudents').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CupertinoActivityIndicator());
@@ -104,7 +104,7 @@ class Statistics extends StatelessWidget {
               ),
               _StatItem(
                 title: 'Teachers',
-                value: "${teachersController.LinguistaTeachers.length}",
+                value: "${teachersController.MarkazTeachers.length}",
                 icon: Iconsax.teacher,
                 accent: const Color(0xFF7C5CFF),
                 onTap: () => Get.to(() => Teachers()),
@@ -247,7 +247,7 @@ class _StatCard extends StatelessWidget {
                 child: FadeTransition(opacity: animation, child: child),
               ),
               child: Text(
-                box.read("isLogged") == 'Linguista9' ? item.value : "- - -",
+                box.read("isLogged") == 'Savvy' ? item.value : "- - -",
                 key: ValueKey(item.value), // important for AnimatedSwitcher to detect change
                 style: const TextStyle(
                   fontSize: 18,

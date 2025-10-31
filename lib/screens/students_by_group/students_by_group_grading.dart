@@ -96,7 +96,7 @@
 //           children: [
 //             StreamBuilder<QuerySnapshot>(
 //                 stream: FirebaseFirestore.instance
-//                     .collection('LinguistaStudents')
+//                     .collection('MarkazStudents')
 //                     .where('items.isDeleted', isEqualTo: false)
 //                     .where('items.groupId', isEqualTo: groupId)
 //                     .snapshots(),

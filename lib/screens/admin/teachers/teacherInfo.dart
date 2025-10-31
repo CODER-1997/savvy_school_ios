@@ -40,7 +40,7 @@ class _TeacherinfoState extends State<Teacherinfo> {
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('LinguistaTeachers')
+            .collection('MarkazTeachers')
             .doc(widget.documentId)
             .snapshots(),
         builder: (context, snapshot) {

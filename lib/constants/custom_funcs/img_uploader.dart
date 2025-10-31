@@ -42,7 +42,7 @@ class ImageUploader {
 
       // Step 3: Save real ImageKit URL to Firestore
       await FirebaseFirestore.instance
-          .collection('LinguistaTeachers')
+          .collection('MarkazTeachers')
           .doc(teacherId)
           .update({
         'items.imgUrl': imageUrl,

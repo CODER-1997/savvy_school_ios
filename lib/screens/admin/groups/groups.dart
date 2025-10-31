@@ -40,7 +40,7 @@ class _AdminGroupsState extends State<AdminGroups> {
     // Update Firestore with the new order
     for (int i = 0; i < documents.length; i++) {
       FirebaseFirestore.instance
-          .collection('LinguistaGroups')
+          .collection('MarkazGroups')
           .doc(documents[i].id)
           .update({'items.order': i});
     }
@@ -64,7 +64,7 @@ class _AdminGroupsState extends State<AdminGroups> {
         backgroundColor: dashBoardColor,
         toolbarHeight: 64,
         title: Text(
-          "Linguista",
+          "Savvy",
           style: appBarStyle.copyWith(color: Colors.white),
         ),
         actions: [
@@ -164,7 +164,7 @@ class _AdminGroupsState extends State<AdminGroups> {
         padding: const EdgeInsets.only(left: 8,top:8,right: 8),
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('LinguistaGroups').orderBy('items.order')
+                .collection('MarkazGroups').orderBy('items.order')
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -298,7 +298,7 @@ class _AdminGroupsState extends State<AdminGroups> {
                                                   ElevatedButton(
 
                                                       onPressed: (){
-                                                        if(    box.read('isLogged') == 'Linguista9' ){
+                                                        if(    box.read('isLogged') == 'Savvy' ){
 
                                                           groupController.deleteGroup(document.id);
 

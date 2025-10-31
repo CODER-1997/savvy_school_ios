@@ -49,7 +49,7 @@ class _AdminStudentsState extends State<AdminStudents> {
           Expanded(
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
-                    .collection('LinguistaStudents')
+                    .collection('MarkazStudents')
                     .where('items.isDeleted', isEqualTo: false)
                     .snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

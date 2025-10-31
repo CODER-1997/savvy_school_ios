@@ -31,7 +31,7 @@ class GroupController extends GetxController {
   }
 
   final CollectionReference _dataCollection =
-      FirebaseFirestore.instance.collection('LinguistaGroups');
+      FirebaseFirestore.instance.collection('MarkazGroups');
 
 
 
@@ -95,7 +95,7 @@ RxInt order = 0.obs;
       isLoading.value = true;
 
       // Reference to the document
-      DocumentReference documentReference =  _firestore.collection('LinguistaGroups').doc(documentId);
+      DocumentReference documentReference =  _firestore.collection('MarkazGroups').doc(documentId);
 
       // Update the desired field
       await documentReference.update({
@@ -120,7 +120,7 @@ RxInt order = 0.obs;
       isLoading.value = true;
 
       // Reference to the document
-      DocumentReference documentReference =  _firestore.collection('LinguistaGroups').doc(documentId);
+      DocumentReference documentReference =  _firestore.collection('MarkazGroups').doc(documentId);
 
       // Update the desired field
       await documentReference.update({
@@ -146,7 +146,7 @@ RxInt order = 0.obs;
 
       // Reference to the document
       DocumentReference documentReference =
-          _firestore.collection('LinguistaGroups').doc(documentId);
+          _firestore.collection('MarkazGroups').doc(documentId);
 
       // Update the desired field
       await documentReference.delete();

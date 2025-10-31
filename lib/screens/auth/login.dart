@@ -124,7 +124,7 @@ class Login extends StatelessWidget {
                     return;
                   }
 
-                  if (id == 'Linguista9' && pass == '6463070') {
+                  if (id == 'Savvy' && pass == '3332') {
                     box.write('isLogged', id);
                     Get.offAll(() => AdminHomeScreen());
                   } else if (id == 'test' && pass == '123') {

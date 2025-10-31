@@ -124,7 +124,7 @@ class _GroupsState extends State<Groups> {
               children: [
                 StreamBuilder<DocumentSnapshot>(
                     stream: FirebaseFirestore.instance
-                        .collection('LinguistaTeachers')
+                        .collection('MarkazTeachers')
                         .doc("${box.read('teacherDocId')}")
                         .snapshots(),
                     builder:

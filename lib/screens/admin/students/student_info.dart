@@ -45,7 +45,7 @@ class StudentInfo extends StatelessWidget {
         ),
       ),
       body: StreamBuilder<DocumentSnapshot>(
-        stream: getDocumentStreamById('LinguistaStudents', studentId),
+        stream: getDocumentStreamById('MarkazStudents', studentId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -62,7 +62,7 @@ class StudentInfo extends StatelessWidget {
             data['items']['isFreeOfcharge'] ?? false;
             return Column(
               children: [
-                box.read('isLogged') == 'Linguista9' ?    Container(
+                box.read('isLogged') == 'Savvy' ?    Container(
                   color: Colors.white,
                   child: ListTile(
                     trailing: IconButton(
@@ -206,7 +206,7 @@ class StudentInfo extends StatelessWidget {
                                                     for (int i = 0;
                                                     i <
                                                         studentController
-                                                            .LinguistaGroups
+                                                            .MarkazGroups
                                                             .length;
                                                     i++)
                                                       GestureDetector(
@@ -215,12 +215,12 @@ class StudentInfo extends StatelessWidget {
                                                           studentController
                                                               .selectedGroup
                                                               .value = studentController
-                                                              .LinguistaGroups[
+                                                              .MarkazGroups[
                                                           i]['group_name'];
                                                           studentController
                                                               .selectedGroupId
                                                               .value = studentController
-                                                              .LinguistaGroups[
+                                                              .MarkazGroups[
                                                           i]['group_id'];
                                     
                                                         },
@@ -238,7 +238,7 @@ class StudentInfo extends StatelessWidget {
                                                               .selectedGroupId
                                                               .value !=
                                                               studentController
-                                                                  .LinguistaGroups[i]
+                                                                  .MarkazGroups[i]
                                                               [
                                                               'group_id']
                                                               ? BoxDecoration(
@@ -257,11 +257,11 @@ class StudentInfo extends StatelessWidget {
                                                               BorderRadius.circular(112),
                                                               border: Border.all(color: Colors.green, width: 1)),
                                                           child: Text(
-                                                            "${studentController.LinguistaGroups[i]['group_name']}",
+                                                            "${studentController.MarkazGroups[i]['group_name']}",
                                                             style: TextStyle(
                                                                 color: studentController
                                                                     .selectedGroupId.value !=
-                                                                    studentController.LinguistaGroups[i]
+                                                                    studentController.MarkazGroups[i]
                                                                     [
                                                                     'group_id']
                                                                     ? Colors
@@ -359,10 +359,10 @@ class StudentInfo extends StatelessWidget {
                     ),
                   ),
                 ):SizedBox(),
-                box.read('isLogged') == 'Linguista9' ?    SizedBox(
+                box.read('isLogged') == 'Savvy' ?    SizedBox(
                   height: 2,
                 ):SizedBox(),
-                box.read('isLogged') == 'Linguista9' || box.read('isLogged') == 'testuser' ?         InkWell(
+                box.read('isLogged') == 'Savvy' || box.read('isLogged') == 'testuser' ?         InkWell(
                   onTap: () {
                     if(  data['items']['isFreeOfcharge']  == false){
                       Get.to(AdminStudentPaymentHistory(
@@ -391,12 +391,12 @@ class StudentInfo extends StatelessWidget {
                     ),
                   ),
                 ):SizedBox(),
-                box.read('isLogged') == 'Linguista9' ?   SizedBox(
+                box.read('isLogged') == 'Savvy' ?   SizedBox(
                   height: 2,
                 ):SizedBox(),
 
 
-                box.read('isLogged') == 'Linguista9' ?       (calculateUnpaidMonths(data['items']['studyDays'],
+                box.read('isLogged') == 'Savvy' ?       (calculateUnpaidMonths(data['items']['studyDays'],
                     data['items']['payments'])
                     .length !=
                     0
@@ -445,7 +445,7 @@ class StudentInfo extends StatelessWidget {
                   ),
                 )
                     : SizedBox()):SizedBox(),
-                box.read('isLogged') == 'Linguista9' ?      (calculateUnpaidMonths(data['items']['studyDays'],
+                box.read('isLogged') == 'Savvy' ?      (calculateUnpaidMonths(data['items']['studyDays'],
                     data['items']['payments'])
                     .length !=
                     0
@@ -499,10 +499,10 @@ class StudentInfo extends StatelessWidget {
                     ),
                   ),
                 ),
-                box.read('isLogged') == 'Linguista9' ?       SizedBox(
+                box.read('isLogged') == 'Savvy' ?       SizedBox(
                   height: 2,
                 ):SizedBox(),
-                box.read('isLogged') == 'Linguista9' ?             InkWell(
+                box.read('isLogged') == 'Savvy' ?             InkWell(
                   onTap: () {
                     showDialog(
                       context: context,
