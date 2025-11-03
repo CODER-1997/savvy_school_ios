@@ -402,6 +402,8 @@ class _StudentsState extends State<Students> {
                                                                 ['surname'],
                                                             students[i]['items']
                                                                 ['phone'],
+                                                            students[i]['items']
+                                                                ['parentPhone'],
                                                           );
 
                                                           return Dialog(

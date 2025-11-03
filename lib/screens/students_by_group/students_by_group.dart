@@ -1,13 +1,11 @@
-import 'package:savvy_school_ios/screens/students_by_group/grading_students.dart';
-import 'package:savvy_school_ios/screens/students_by_group/student_by_group_income_by_month.dart';
-import 'package:savvy_school_ios/screens/students_by_group/students_by_group_attendance.dart';
+ import 'package:savvy_school_ios/screens/students_by_group/attendance/students_by_group_attendance.dart';
  import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
-import 'exams.dart';
+
 import '../../constants/text_styles.dart';
 import '../../constants/theme.dart';
 import '../../controllers/students/student_controller.dart';
@@ -113,7 +111,7 @@ class _StudentsByGroupState extends State<StudentsByGroup>
                   style: TextStyle(color: Colors.white),
                 )),
             Text(
-              "Imtihonlar",
+              'Imtihonlar',
               style: TextStyle(color: Colors.white),
             ),
 
@@ -153,12 +151,9 @@ class _StudentsByGroupState extends State<StudentsByGroup>
             groupName: widget.groupName,
           ),
           Exams(
-            groupId: widget.groupId,
             group: widget.groupName,
+            groupId: widget.groupId,
           ),
-       // StudentByGroupIncomeByMonth(
-       //   groupId: widget.groupId,
-       //   groupName: widget.groupName,)
 
         ],
       )),

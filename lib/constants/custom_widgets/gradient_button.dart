@@ -12,8 +12,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      width: double.infinity,
-      height: 52,
+       height: 52,
       decoration: ShapeDecoration(
         gradient: LinearGradient(
           begin: Alignment(-1.00, -0.00),
@@ -37,7 +36,7 @@ class CustomButton extends StatelessWidget {
         style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 14,
-            fontFamily: "Manrope",
+            fontFamily: "Nunito",
             color: Colors.white),
       ): Container(
       padding: EdgeInsets.all(4),

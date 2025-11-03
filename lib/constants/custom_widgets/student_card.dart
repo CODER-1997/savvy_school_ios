@@ -1,24 +1,30 @@
-import 'package:flutter/cupertino.dart';
+ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
-import '../text_styles.dart';
+ import '../text_styles.dart';
 import '../utils.dart';
 
 
 class StudentCard extends StatelessWidget {
   final Map item;
   final bool? isFeePaid;
+  final String ? studentId;
 
-  StudentCard({required this.item, this.isFeePaid});
+  StudentCard({required this.item, this.isFeePaid, this.studentId,  } );
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(2),
       padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(color: CupertinoColors.white),
+      decoration: BoxDecoration(color: CupertinoColors.white,
+      borderRadius: BorderRadius.circular(8)
+      
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -159,6 +165,16 @@ class StudentCard extends StatelessWidget {
               )
             ],
           ),
+        item['studyDays'].length == 0 ?  Text('Umuman qatnashmagan',style: TextStyle(
+            fontSize: 10,
+            color: Colors.red
+          ),):SizedBox(),
+
+          item['payments'].length == 0 && item['isFreeOfcharge'] == false ?  Text("Umuman to'lov yo'q",style: TextStyle(
+              fontSize: 10,
+              color: Colors.red
+          ),):SizedBox(),
+
         ],
       ),
     );

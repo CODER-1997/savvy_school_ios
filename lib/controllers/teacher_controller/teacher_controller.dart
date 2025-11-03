@@ -8,7 +8,6 @@ import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:intl/intl.dart';
 
 import '../../constants/utils.dart';
-import '../../models/student_model.dart';
 
 class TeacherController extends GetxController {
 
@@ -24,63 +23,70 @@ class TeacherController extends GetxController {
 
 
 
-   void addTeacherClassHour(String documentId,) async {
-      try {
-        // Retrieve the document reference
-        DocumentReference documentReference = FirebaseFirestore.instance
-            .collection('MarkazTeachers')
-            .doc(documentId);
+  void addTeacherClassHour(
+      String documentId,
+      String groupId,
+      String groupName,
+      bool isLate,
 
-        // Get the current document snapshot
-        DocumentSnapshot documentSnapshot = await documentReference.get();
-        Map<String, dynamic> currentMap = Map<String, dynamic>.from(documentSnapshot['items'] ?? {});
-        // Get the current array field value
-        List<dynamic> currentArray = List<dynamic>.from(currentMap['classHours'] ?? []);
-        // Append the new item to the array
+      ) async {
+    try {
+      // Retrieve the document reference
+      DocumentReference documentReference = FirebaseFirestore.instance  .collection('MarkazTeachers')    .doc(documentId);
 
-        // find element by month and year
-        // int index = -1;
-        // for (int i = 0; i < currentArray.length; i++) {
-        //   if (currentArray[i]['paidMonth'] == month &&
-        //       currentArray[i]['paidYear'] == year) {
-        //     index = i;
-        //     break;
-        //   }
-        // }
-        // if (index == -1) {
-        //   currentArray.add({
-        //     'paidDate': paidDate,
-        //     'paidSum': payment.text,
-        //
-        //   });
-        // }
-        // else{
-        currentArray.add({
-           'Date': DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now()),
-           'isPaid': false,
-           'id': generateUniqueId()
-        });
-        // }
+      // Get the current document snapshot
+      DocumentSnapshot documentSnapshot = await documentReference.get();
+      Map<String, dynamic> currentMap = Map<String, dynamic>.from(documentSnapshot['items'] ?? {});
+      // Get the current array field value
+      List<dynamic> currentArray = List<dynamic>.from(currentMap['classHours'] ?? []);
+      // Append the new item to the array
 
-        // Update the document with the new array value
-        await documentReference.update({
-          'items.classHours': currentArray,
-        });
+      // find element by month and year
+      // int index = -1;
+      // for (int i = 0; i < currentArray.length; i++) {
+      //   if (currentArray[i]['paidMonth'] == month &&
+      //       currentArray[i]['paidYear'] == year) {
+      //     index = i;
+      //     break;
+      //   }
+      // }
+      // if (index == -1) {
+      //   currentArray.add({
+      //     'paidDate': paidDate,
+      //     'paidSum': payment.text,
+      //
+      //   });
+      // }
+      // else{
+      currentArray.add({
+        'Date': DateFormat('dd-MM-yyyy HH:mm').format(DateTime.now()),
+        'isPaid': false,
+        'groupId': groupId,
+        'groupName': groupName,
+        'isLate': isLate,
+        'id': generateUniqueId()
+      });
+      // }
 
-        // Optional: Provide feedback to the user
-        isLoading.value = false;
+      // Update the document with the new array value
+      await documentReference.update({
+        'items.classHours': currentArray,
+      });
 
-      } catch (e) {
-        // Handle errors here
-        print('Error adding item to array: $e');
-        Get.snackbar(
-          'Error:${e}',
-          e.toString(),
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
-        );
-      }
+      // Optional: Provide feedback to the user
+      isLoading.value = false;
+
+    } catch (e) {
+      // Handle errors here
+      print('Error adding item to array: $e');
+      Get.snackbar(
+        'Error:${e}',
+        e.toString(),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
 
   }
 
@@ -138,7 +144,7 @@ class TeacherController extends GetxController {
     }
   }
 
-  // Check student study inteval by ..
+// Check student study inteval by ..
 
 
 // Edit payment

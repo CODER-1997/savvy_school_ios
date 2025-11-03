@@ -8,8 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ImageUploader {
   final _picker = ImagePicker();
   RxBool isUploading = false.obs;
-  RxBool isLoading = false
-      .obs; // ✅ New observable bool to track overall loading status
+  RxBool isLoading = false  .obs; // ✅ New observable bool to track overall loading status
 
   /// Upload image for specific teacher document
   Future<void> uploadTeacherImage(String teacherId) async {
@@ -42,7 +41,7 @@ class ImageUploader {
 
       // Step 3: Save real ImageKit URL to Firestore
       await FirebaseFirestore.instance
-          .collection('MarkazTeachers')
+          .collection('LinguistaTeachers')
           .doc(teacherId)
           .update({
         'items.imgUrl': imageUrl,

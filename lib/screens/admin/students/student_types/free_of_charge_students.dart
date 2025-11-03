@@ -59,7 +59,7 @@ class FreeOfChargeds extends StatelessWidget {
                                       studentId: students[i].id));
                                 },
                                 child: StudentCard(
-                                  item: students[i]['items'],
+                                  item: students[i]['items'], studentId: students[i].id,
                                 ),
                               );
                             })

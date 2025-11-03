@@ -60,6 +60,9 @@ class TeachersController extends GetxController {
 
 
 
+  RxString teacherExperience  = ''.obs;
+  RxString teacherScore  = ''.obs;
+
 
   void addNewTeacher() async {
     isLoading.value = true;
@@ -71,7 +74,7 @@ class TeachersController extends GetxController {
         isBanned: false,
         groupIds: teacherGroupIds.value
         ,
-        groups: teacherGroups.value, isDeleted: false,
+        groups: teacherGroups.value, score: teacherScore.value, experience: teacherExperience.value, isDeleted: false,
       );
       // Create a new document with an empty list
       await _dataCollection.add({
@@ -99,47 +102,6 @@ class TeachersController extends GetxController {
     }
     isLoading.value = false;
   }
-  void signUpAsTeacher(String uniqueId) async {
-    isLoading.value = true;
-    try {
-      TeacherModel newData = TeacherModel(
-        name: TeacherName.text,
-        surname: TeacherSurname.text,
-        uniqueId:  uniqueId.removeAllWhitespace,
-        isBanned: false,
-        isDeleted: true,
-        
-        groupIds: []
-        ,
-        groups: [],
-      );
-      // Create a new document with an empty list
-      await _dataCollection.add({
-        'items': newData.toMap(),
-      });
-      // Get.snackbar(
-      //   "Success !",
-      //   "New group added successfully !",
-      //   backgroundColor: Colors.green,
-      //   colorText: Colors.white,
-      //   snackPosition: SnackPosition.TOP,
-      // );
-      isLoading.value = false;
-      TeacherName.clear();
-      Get.back();
-    } catch (e) {
-      print(e);
-      Get.snackbar(
-        'Error:${e}',
-        e.toString(),
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-    isLoading.value = false;
-  }
-
 
   void editTeacher(String documentId) async {
     isLoading.value = true;
@@ -155,6 +117,8 @@ class TeachersController extends GetxController {
       // Update the desired field
       await documentReference.update({
         'items.name': TeacherNameEdit.text,
+        'items.score': teacherScore.value,
+        'items.experience': teacherExperience.value,
         'items.surname': TeacherSurnameEdit.text,
         'items.groups': teacherGroupsEdit.value,
         'items.groupIds': teacherGroupIdsEdit.value
@@ -190,6 +154,46 @@ class TeachersController extends GetxController {
     } catch (e) {
       print('Error updating document field: $e');
       isLoading.value = false;
+    }
+    isLoading.value = false;
+  }
+  void signUpAsTeacher(String uniqueId) async {
+    isLoading.value = true;
+    try {
+      TeacherModel newData = TeacherModel(
+        name: TeacherName.text,
+        surname: TeacherSurname.text,
+        uniqueId:  uniqueId.removeAllWhitespace,
+        isBanned: false,
+        isDeleted: true,
+
+        groupIds: []
+        ,
+        groups: [], score: '', experience: '',
+      );
+      // Create a new document with an empty list
+      await _dataCollection.add({
+        'items': newData.toMap(),
+      });
+      // Get.snackbar(
+      //   "Success !",
+      //   "New group added successfully !",
+      //   backgroundColor: Colors.green,
+      //   colorText: Colors.white,
+      //   snackPosition: SnackPosition.TOP,
+      // );
+      isLoading.value = false;
+      TeacherName.clear();
+      Get.back();
+    } catch (e) {
+      print(e);
+      Get.snackbar(
+        'Error:${e}',
+        e.toString(),
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
     isLoading.value = false;
   }

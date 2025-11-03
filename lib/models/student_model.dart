@@ -2,6 +2,8 @@ class StudentModel {
   final String name;
   final String surname;
   final String phone;
+  final String parentPhone;
+  final String grade;
   final String group;
   final List payments;
   final List grades;
@@ -18,6 +20,8 @@ class StudentModel {
 
   StudentModel( {
     required this.name,
+    required this.parentPhone,
+    required this.grade,
     required this.surname,
     required this.phone,
     required this.group,
@@ -40,6 +44,8 @@ class StudentModel {
       'name': name.toLowerCase(),
       'surname': surname.toLowerCase(),
       'phone': phone,
+      'parentPhone': parentPhone,
+      'grade': grade,
       'group': group,
       'exams': exams,
       'grades': grades,

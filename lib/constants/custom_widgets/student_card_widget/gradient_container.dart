@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import '../../color_utils.dart';
 
 
-
 class GradientLetterBox extends StatelessWidget {
   final String letter;
   final String position;

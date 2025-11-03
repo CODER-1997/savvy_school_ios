@@ -90,7 +90,7 @@ class PaidStudents extends StatelessWidget {
                           studentId: element.id));
                     },
                     child: StudentCard(
-                      item: element['items'],
+                      item: element['items'], studentId: element.id,
                     ),
                   ),
                    floatingHeader: false, // optional

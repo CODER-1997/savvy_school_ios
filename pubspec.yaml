@@ -49,10 +49,12 @@ dependencies:
   iconsax_flutter: ^1.0.1
   firebase_storage: ^12.4.10
   image_picker: ^1.1.2
+  permission_handler: ^11.3.1
 
   share_plus: ^10.0.0
   pdf: ^3.9.0
   screenshot: ^3.0.0
+  url_launcher: ^6.3.1
 
 
 
@@ -66,7 +68,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/logo_2.png"
+  image_path: "assets/logo.png"
   min_sdk_android: 21
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -9,6 +9,7 @@ import 'package:savvy_school_ios/screens/admin/students/student_info.dart';
 
 import '../../../../constants/custom_widgets/emptiness.dart';
  import '../../../../constants/theme.dart';
+ import '../../../../services/sms_service.dart';
 
 class UnPaidStudents extends StatelessWidget {
   final List students;
@@ -17,6 +18,7 @@ class UnPaidStudents extends StatelessWidget {
   UnPaidStudents({required this.students, this.title});
 
   RxBool messageLoader = false.obs;
+  SMSService _smsService = SMSService();
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +51,10 @@ class UnPaidStudents extends StatelessWidget {
                       itemBuilder: (context, i) {
                         return GestureDetector(
                           onTap: () {
-                            Get.to(StudentInfo(studentId: students[i].id));
+                            Get.to((studentId: students[i].id));
                           },
                           child: StudentCard(
-                            item: students[i]['items'],
+                            item: students[i]['items'], studentId: students[i].id,
                           ),
                         );
                       })
