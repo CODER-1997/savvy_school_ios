@@ -1,3 +1,4 @@
+import 'package:permission_handler/permission_handler.dart';
 import 'package:savvy_school_ios/screens/admin/admin_home_screen.dart';
 import 'package:savvy_school_ios/screens/auth/login.dart';
 import 'package:savvy_school_ios/screens/home/home_screen.dart';
@@ -45,12 +46,41 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
     MyHomePage({super.key, required this.title});
 
   final String title;
 
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   var box = GetStorage();
+  Future<void> requestSmsPermission() async {
+    PermissionStatus status = await Permission.sms.request();
+
+    if (status.isGranted) {
+      print("Permission granted");
+    } else if (status.isDenied) {
+      print("Permission denied. Please grant the permission.");
+      await Permission.sms.request();
+    } else if (status.isPermanentlyDenied) {
+      print("Permission permanently denied. Opening app settings...");
+      openAppSettings();
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    requestSmsPermission();
+    // setUpPushNotification();
+    // LocalNotifications.init();
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
