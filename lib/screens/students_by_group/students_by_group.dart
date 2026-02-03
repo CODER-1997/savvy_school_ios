@@ -79,10 +79,10 @@ class _StudentsByGroupState extends State<StudentsByGroup>
               SizedBox(
                 width: 16,
               ),
-              AddStudent(
-                groupName: widget.groupName,
-                groupId: widget.groupId,
-              ),
+              // AddStudent(
+              //   groupName: widget.groupName,
+              //   groupId: widget.groupId,
+              // ),
               SizedBox(
                 width: 8,
               )

@@ -67,7 +67,7 @@ class StudentInfo extends StatelessWidget {
         ),
       ),
       body: StreamBuilder<DocumentSnapshot>(
-        stream: getDocumentStreamById('MarkazStudents', studentId),
+        stream: getDocumentStreamById('AkhmedovStudents', studentId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -227,15 +227,15 @@ class StudentInfo extends StatelessWidget {
                                                     children: [
                                                       for (int i = 0;
                                                       i <
-                                                          studentController.MarkazGroups.length;
+                                                          studentController.AkhmedovGroups.length;
                                                       i++)
                                                         GestureDetector(
                                                           onTap: () {
                                                             studentController.selectedGroup.value =
-                                                            studentController.MarkazGroups[i]
+                                                            studentController.AkhmedovGroups[i]
                                                             ['group_name'];
                                                             studentController.selectedGroupId.value =
-                                                            studentController.MarkazGroups[i]
+                                                            studentController.AkhmedovGroups[i]
                                                             ['group_id'];
                                                           },
                                                           child: Container(
@@ -244,7 +244,7 @@ class StudentInfo extends StatelessWidget {
                                                             margin: const EdgeInsets.all(8),
                                                             decoration: studentController
                                                                 .selectedGroupId.value !=
-                                                                studentController.MarkazGroups[i]
+                                                                studentController.AkhmedovGroups[i]
                                                                 ['group_id']
                                                                 ? BoxDecoration(
                                                               borderRadius:
@@ -262,13 +262,13 @@ class StudentInfo extends StatelessWidget {
                                                                   width: 1),
                                                             ),
                                                             child: Text(
-                                                              "${studentController.MarkazGroups[i]['group_name']}",
+                                                              "${studentController.AkhmedovGroups[i]['group_name']}",
                                                               style: TextStyle(
                                                                 color: studentController
                                                                     .selectedGroupId
                                                                     .value !=
                                                                     studentController
-                                                                        .MarkazGroups[i]
+                                                                        .AkhmedovGroups[i]
                                                                     ['group_id']
                                                                     ? Colors.black
                                                                     : CupertinoColors.white,

@@ -75,7 +75,7 @@ class Statistics extends StatelessWidget {
       ),
       child: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('MarkazStudents').snapshots(),
+          stream: FirebaseFirestore.instance.collection('AkhmedovStudents').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CupertinoActivityIndicator());
@@ -104,7 +104,7 @@ class Statistics extends StatelessWidget {
               ),
               _StatItem(
                 title: 'Teachers',
-                value: "${teachersController.MarkazTeachers.length}",
+                value: "${teachersController.AkhmedovTeachers.length}",
                 icon: Iconsax.teacher,
                 accent: const Color(0xFF7C5CFF),
                 onTap: () => Get.to(() => Teachers()),

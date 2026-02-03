@@ -14,7 +14,7 @@ class GradeController extends GetxController {
   RxBool isLoading = false.obs;
 
   final CollectionReference _dataCollection =
-      FirebaseFirestore.instance.collection('MarkazGrading');
+      FirebaseFirestore.instance.collection('AkhmedovGrading');
   RxInt order = 0.obs;
   GetStorage box = GetStorage();
 
@@ -66,7 +66,7 @@ class GradeController extends GetxController {
 
       // Reference to the document
       DocumentReference documentReference =
-          _firestore.collection('MarkazGrading').doc(documentId);
+          _firestore.collection('AkhmedovGrading').doc(documentId);
 
       // Update the desired field
       await documentReference.delete();
@@ -87,7 +87,7 @@ class GradeController extends GetxController {
     try {
       // Retrieve the document reference
       DocumentReference documentReference = FirebaseFirestore.instance
-          .collection('MarkazStudents')
+          .collection('AkhmedovStudents')
           .doc(documentId);
 
       // Get the current document snapshot
@@ -147,7 +147,7 @@ class GradeController extends GetxController {
     try {
       // Retrieve the document reference
       DocumentReference documentReference = FirebaseFirestore.instance
-          .collection('MarkazStudents')
+          .collection('AkhmedovStudents')
           .doc(documentId);
 
       // Get the current document snapshot

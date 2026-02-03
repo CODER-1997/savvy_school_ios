@@ -35,7 +35,7 @@ class ExamsController extends GetxController {
   }
 
   final CollectionReference _dataCollection =
-  FirebaseFirestore.instance.collection('MarkazExams');
+  FirebaseFirestore.instance.collection('AkhmedovExams');
   RxInt order = 0.obs;
   GetStorage box = GetStorage();
 
@@ -88,7 +88,7 @@ class ExamsController extends GetxController {
 
       // Reference to the document
       DocumentReference documentReference =
-      _firestore.collection('MarkazExams').doc(documentId);
+      _firestore.collection('AkhmedovExams').doc(documentId);
 
       // Update the desired field
       await documentReference.update({
@@ -115,7 +115,7 @@ class ExamsController extends GetxController {
 
       // Reference to the document
       DocumentReference documentReference =
-      _firestore.collection('MarkazExams').doc(documentId);
+      _firestore.collection('AkhmedovExams').doc(documentId);
 
       // Update the desired field
       await documentReference.update({
@@ -140,7 +140,7 @@ class ExamsController extends GetxController {
 
       // Reference to the document
       DocumentReference documentReference =
-      _firestore.collection('MarkazExams').doc(documentId);
+      _firestore.collection('AkhmedovExams').doc(documentId);
 
       // Update the desired field
       await documentReference.delete();

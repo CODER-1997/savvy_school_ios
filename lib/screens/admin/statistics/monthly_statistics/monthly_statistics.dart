@@ -46,7 +46,7 @@ class MonthlyStatistics extends StatelessWidget {
         children: [
           StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('MarkazStudents').
+                .collection('AkhmedovStudents').
             where('items.isDeleted',isEqualTo: false)
             .where('items.isFreeOfcharge',isEqualTo: false)
                 .snapshots(),

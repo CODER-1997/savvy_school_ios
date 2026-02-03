@@ -39,7 +39,7 @@ class _AdminGroupsState extends State<AdminGroups> {
     // Update Firestore with the new order
     for (int i = 0; i < documents.length; i++) {
       FirebaseFirestore.instance
-          .collection('MarkazGroups')
+          .collection('AkhmedovGroups')
           .doc(documents[i].id)
           .update({'items.order': i});
     }
@@ -163,7 +163,7 @@ class _AdminGroupsState extends State<AdminGroups> {
         padding: const EdgeInsets.only(left: 8,top:8,right: 8),
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('MarkazGroups').orderBy('items.order')
+                .collection('AkhmedovGroups').orderBy('items.order')
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

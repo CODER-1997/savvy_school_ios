@@ -200,19 +200,19 @@ class _TeachersState extends State<Teachers> {
                                                 for (int i = 0;
                                                 i <
                                                     studentController
-                                                        .MarkazGroups
+                                                        .AkhmedovGroups
                                                         .length;
                                                 i++)
                                                   GestureDetector(
                                                     onTap: () {
                                 
-                                                      if (teachersController.teacherGroupIds.contains(studentController.MarkazGroups[i]['group_id'])) {
-                                                        teachersController .teacherGroupIds.remove(studentController.MarkazGroups[i]['group_id']);
-                                                        teachersController.teacherGroups.removeWhere((el)=> el['group_id']== studentController.MarkazGroups[i]['group_id']);
+                                                      if (teachersController.teacherGroupIds.contains(studentController.AkhmedovGroups[i]['group_id'])) {
+                                                        teachersController .teacherGroupIds.remove(studentController.AkhmedovGroups[i]['group_id']);
+                                                        teachersController.teacherGroups.removeWhere((el)=> el['group_id']== studentController.AkhmedovGroups[i]['group_id']);
                                                         print('Teacher groups ${ teachersController.teacherGroups}');
                                                       } else {
-                                                        teachersController.teacherGroups.add(studentController.MarkazGroups[i]);
-                                                        teachersController.teacherGroupIds.add(studentController.MarkazGroups[i]['group_id']);
+                                                        teachersController.teacherGroups.add(studentController.AkhmedovGroups[i]);
+                                                        teachersController.teacherGroupIds.add(studentController.AkhmedovGroups[i]['group_id']);
                                                         print('Teacher groups ${ teachersController.teacherGroups}');
                                 
                                                       }
@@ -228,7 +228,7 @@ class _TeachersState extends State<Teachers> {
                                                       decoration: !teachersController
                                                           .teacherGroupIds
                                                           .contains(studentController
-                                                          .MarkazGroups[i][
+                                                          .AkhmedovGroups[i][
                                                       'group_id'])
                                                           ? BoxDecoration(
                                                           borderRadius:
@@ -245,12 +245,12 @@ class _TeachersState extends State<Teachers> {
                                                           BorderRadius.circular(112),
                                                           border: Border.all(color: Colors.green, width: 1)),
                                                       child: Text(
-                                                        "${studentController.MarkazGroups[i]['group_name']}",
+                                                        "${studentController.AkhmedovGroups[i]['group_name']}",
                                                         style: TextStyle(
                                                             color: !teachersController
                                                                 .teacherGroupIds
                                                                 .contains(
-                                                                studentController.MarkazGroups[i]
+                                                                studentController.AkhmedovGroups[i]
                                                                 [
                                                                 'group_id'])
                                                                 ? Colors.black
@@ -367,7 +367,7 @@ class _TeachersState extends State<Teachers> {
         ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
-            .collection('MarkazTeachers')
+            .collection('AkhmedovTeachers')
             //.where('items.isDeleted', isEqualTo: false)
             .snapshots(),
         builder: (context, snapshot) {
@@ -561,7 +561,7 @@ class _TeachersState extends State<Teachers> {
                             direction: Axis.vertical,
 
                             children: _buildGroupSelector(
-                              studentController.MarkazGroups,
+                              studentController.AkhmedovGroups,
                               teachersController.teacherGroupIds,
                               teachersController.teacherGroups,
                             ),
@@ -662,7 +662,7 @@ class _TeachersState extends State<Teachers> {
                             spacing: 8,
                             runSpacing: 8,
                             children: _buildGroupSelector(
-                              studentController.MarkazGroups,
+                              studentController.AkhmedovGroups,
                               teachersController.teacherGroupIdsEdit,
                               teachersController.teacherGroupsEdit,
                             ),

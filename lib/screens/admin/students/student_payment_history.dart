@@ -76,7 +76,7 @@ class _AdminStudentPaymentHistoryState extends State<AdminStudentPaymentHistory>
       body:   SingleChildScrollView(
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('MarkazStudents').where('items.uniqueId',isEqualTo: '${widget.uniqueId}')
+                .collection('AkhmedovStudents').where('items.uniqueId',isEqualTo: '${widget.uniqueId}')
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

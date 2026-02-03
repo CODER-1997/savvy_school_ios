@@ -132,7 +132,7 @@ class _ExamResultsState extends State<ExamResults> {
           children: [
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('MarkazStudents')
+                    .collection('AkhmedovStudents')
                     .where('items.isDeleted', isEqualTo: false)
                     .where('items.groupId', isEqualTo: widget.groupId)
                     .snapshots(),

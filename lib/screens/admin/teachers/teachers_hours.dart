@@ -60,7 +60,7 @@ class TeachersHours extends StatelessWidget {
           padding: const EdgeInsets.all(1.0),
           child: StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection('MarkazTeachers')
+                  .collection('AkhmedovTeachers')
                   .doc(docId)
                   .snapshots(),
               builder: (BuildContext context,
@@ -252,13 +252,13 @@ class TeachersHours extends StatelessWidget {
                                     for (int i = 0;
                                     i <
                                         studentController
-                                            .MarkazGroups
+                                            .AkhmedovGroups
                                             .length;
                                     i++)
                                       GestureDetector(
                                         onTap: () {
-                                          _selectedGroupId.value = studentController.MarkazGroups[i]['group_id'];
-                                          _selectedGroupName.value = studentController.MarkazGroups[i]['group_name'];
+                                          _selectedGroupId.value = studentController.AkhmedovGroups[i]['group_id'];
+                                          _selectedGroupName.value = studentController.AkhmedovGroups[i]['group_name'];
 
 
 
@@ -270,7 +270,7 @@ class TeachersHours extends StatelessWidget {
                                               vertical: 8),
                                           margin:
                                           EdgeInsets.all(8),
-                                          decoration:  _selectedGroupId.value != studentController.MarkazGroups[i]['group_id']
+                                          decoration:  _selectedGroupId.value != studentController.AkhmedovGroups[i]['group_id']
                                               ? BoxDecoration(
                                               borderRadius:
                                               BorderRadius.circular(
@@ -286,9 +286,9 @@ class TeachersHours extends StatelessWidget {
                                               BorderRadius.circular(112),
                                               border: Border.all(color: Colors.green, width: 1)),
                                           child: Text(
-                                            "${studentController.MarkazGroups[i]['group_name']}",
+                                            "${studentController.AkhmedovGroups[i]['group_name']}",
                                             style: TextStyle(
-                                                color:  _selectedGroupId.value != studentController.MarkazGroups[i]['group_id']
+                                                color:  _selectedGroupId.value != studentController.AkhmedovGroups[i]['group_id']
                                                     ? Colors.black
                                                     : CupertinoColors
                                                     .white),

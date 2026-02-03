@@ -173,7 +173,7 @@ class _AdminStudentsState extends State<AdminStudents> {
         //                                     for (int i = 0;
         //                                     i <
         //                                         studentController
-        //                                             .MarkazGroups
+        //                                             .AkhmedovGroups
         //                                             .length;
         //                                     i++)
         //                                       InkWell(
@@ -182,13 +182,13 @@ class _AdminStudentsState extends State<AdminStudents> {
         //                                               .selectedGroup
         //                                               .value =
         //                                           studentController
-        //                                               .MarkazGroups[
+        //                                               .AkhmedovGroups[
         //                                           i]['group_name'];
         //                                           studentController
         //                                               .selectedGroupId
         //                                               .value =
         //                                           studentController
-        //                                               .MarkazGroups[
+        //                                               .AkhmedovGroups[
         //                                           i]['group_id'];
         //                                           print(studentController
         //                                               .selectedGroupId
@@ -203,7 +203,7 @@ class _AdminStudentsState extends State<AdminStudents> {
         //                                           decoration: studentController
         //                                               .selectedGroupId
         //                                               .value !=
-        //                                               studentController.MarkazGroups[i]
+        //                                               studentController.AkhmedovGroups[i]
         //                                               ['group_id']
         //                                               ? BoxDecoration(
         //                                               borderRadius:
@@ -223,13 +223,13 @@ class _AdminStudentsState extends State<AdminStudents> {
         //                                                   color: Colors.green,
         //                                                   width: 1)),
         //                                           child: Text(
-        //                                             "${studentController.MarkazGroups[i]['group_name']}",
+        //                                             "${studentController.AkhmedovGroups[i]['group_name']}",
         //                                             style: TextStyle(
         //                                                 color: studentController
         //                                                     .selectedGroupId
         //                                                     .value !=
         //                                                     studentController
-        //                                                         .MarkazGroups[i]
+        //                                                         .AkhmedovGroups[i]
         //                                                     [
         //                                                     'group_id']
         //                                                     ? Colors.black
@@ -287,7 +287,7 @@ class _AdminStudentsState extends State<AdminStudents> {
           Expanded(
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
-                    .collection('MarkazStudents')
+                    .collection('AkhmedovStudents')
                     .where('items.isDeleted', isEqualTo: false)
                     .snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

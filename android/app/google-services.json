@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "595924763103",
-    "project_id": "sawyschool",
-    "storage_bucket": "sawyschool.firebasestorage.app"
+    "project_number": "178371306577",
+    "project_id": "akhmedovschool-aa5e9",
+    "storage_bucket": "akhmedovschool-aa5e9.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:595924763103:android:ee365e5c3a53a5ae1cc46a",
+        "mobilesdk_app_id": "1:178371306577:android:af844b3e2cb747946a0470",
         "android_client_info": {
-          "package_name": "com.example.karmana_markaz"
+          "package_name": "beki.app.akhmedov_school"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAHDFcjkTHfAdJU1lEGjXQ33D-wiC1D2iw"
+          "current_key": "AIzaSyAYb2fyXhaHAg_SZLlCXkINaRZC2BQPRXE"
         }
       ],
       "services": {
@@ -26,7 +26,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:595924763103:android:c60d842c7c3765a21cc46a",
+        "mobilesdk_app_id": "1:178371306577:android:c6508d251351e0bb6a0470",
         "android_client_info": {
           "package_name": "com.example.savvy_school_ios"
         }
@@ -34,7 +34,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAHDFcjkTHfAdJU1lEGjXQ33D-wiC1D2iw"
+          "current_key": "AIzaSyAYb2fyXhaHAg_SZLlCXkINaRZC2BQPRXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178371306577:android:a774be8e488ce0ef6a0470",
+        "android_client_info": {
+          "package_name": "student.app.akhmedov"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYb2fyXhaHAg_SZLlCXkINaRZC2BQPRXE"
         }
       ],
       "services": {

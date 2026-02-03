@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
-        android:label="Savvy School"
+        android:label="Akhmedov IOS"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

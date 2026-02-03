@@ -30,7 +30,7 @@ class Teacherinfo extends StatelessWidget {
           padding: const EdgeInsets.all(1.0),
           child: StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
-                  .collection('MarkazTeachers')
+                  .collection('AkhmedovTeachers')
                   .doc(documentId)
                   .snapshots(),
               builder: (BuildContext context,

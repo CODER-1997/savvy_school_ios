@@ -32,7 +32,7 @@ class Exams extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('MarkazExams')
+                .collection('AkhmedovExams')
                 .where('items.group', isEqualTo: group)
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

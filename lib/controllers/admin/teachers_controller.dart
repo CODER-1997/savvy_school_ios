@@ -33,17 +33,17 @@ class TeachersController extends GetxController {
   }
 
   final CollectionReference _dataCollection =
-  FirebaseFirestore.instance.collection('MarkazTeachers');
+  FirebaseFirestore.instance.collection('AkhmedovTeachers');
 
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final RxList MarkazTeachers = [].obs;
+  final RxList AkhmedovTeachers = [].obs;
 
   Future<void> fetchTeachers() async {
     isLoading.value = true;
-    QuerySnapshot querySnapshot = await _firestore.collection('MarkazTeachers').get();
-    MarkazTeachers.clear();
+    QuerySnapshot querySnapshot = await _firestore.collection('AkhmedovTeachers').get();
+    AkhmedovTeachers.clear();
     for (var doc in querySnapshot.docs) {
-      MarkazTeachers.add({
+      AkhmedovTeachers.add({
         'teacher_name': (doc.data() as Map<String, dynamic>)['items']['name'],
       });
     }
@@ -113,7 +113,7 @@ class TeachersController extends GetxController {
 
       // Reference to the document
       DocumentReference documentReference =
-      _firestore.collection('MarkazTeachers').doc(documentId);
+      _firestore.collection('AkhmedovTeachers').doc(documentId);
       // Update the desired field
       await documentReference.update({
         'items.name': TeacherNameEdit.text,
@@ -144,7 +144,7 @@ class TeachersController extends GetxController {
 
       // Reference to the document
       DocumentReference documentReference =
-      _firestore.collection('MarkazTeachers').doc(documentId);
+      _firestore.collection('AkhmedovTeachers').doc(documentId);
 
       // Update the desired field
       await documentReference.update({
@@ -210,7 +210,7 @@ class TeachersController extends GetxController {
 
       // Reference to the document
       DocumentReference documentReference =
-      _firestore.collection('MarkazTeachers').doc(documentId);
+      _firestore.collection('AkhmedovTeachers').doc(documentId);
 
       // Update the desired field
       await documentReference.delete();

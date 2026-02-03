@@ -38,9 +38,9 @@ class StudentController extends GetxController {
   RxBool isFreeOfCharge = false.obs;
 
 
-  final RxList MarkazGroups = [].obs;
-  final RxList MarkazStudents = [].obs;
-  final RxList MarkazStudents2= [].obs;
+  final RxList AkhmedovGroups = [].obs;
+  final RxList AkhmedovStudents = [].obs;
+  final RxList AkhmedovStudents2= [].obs;
   RxBool loadGroups = false.obs;
   RxBool loadStudents = false.obs;
 
@@ -50,10 +50,10 @@ class StudentController extends GetxController {
 
   Future<void> fetchGroups() async {
     loadGroups.value = true;
-    QuerySnapshot querySnapshot = await _firestore.collection('MarkazGroups').get();
-    MarkazGroups.clear();
+    QuerySnapshot querySnapshot = await _firestore.collection('AkhmedovGroups').get();
+    AkhmedovGroups.clear();
     for (var doc in querySnapshot.docs) {
-      MarkazGroups.add({
+      AkhmedovGroups.add({
         'group_name': (doc.data() as Map<String, dynamic>)['items']['name'],
         'group_id': (doc.data() as Map<String, dynamic>)['items']['uniqueId'],
       });
@@ -64,10 +64,10 @@ class StudentController extends GetxController {
   //
   // Future<void> fetchStudents() async {
   //   isLoading.value = true;
-  //   QuerySnapshot querySnapshot = await _firestore.collection('MarkazStudents').where('items.isDeleted',isEqualTo: false).get();
-  //   MarkazStudents.clear();
+  //   QuerySnapshot querySnapshot = await _firestore.collection('AkhmedovStudents').where('items.isDeleted',isEqualTo: false).get();
+  //   AkhmedovStudents.clear();
   //   for (var doc in querySnapshot.docs) {
-  //     MarkazStudents.add(doc);
+  //     AkhmedovStudents.add(doc);
   //   }
   //   isLoading.value = false;
   // }
@@ -89,7 +89,7 @@ class StudentController extends GetxController {
     parentPhoneEdit = TextEditingController(text: parentPhone);
   }
 
-  final CollectionReference _dataCollection = FirebaseFirestore.instance.collection('MarkazStudents');
+  final CollectionReference _dataCollection = FirebaseFirestore.instance.collection('AkhmedovStudents');
 
   @override
   void onInit() {
@@ -164,7 +164,7 @@ class StudentController extends GetxController {
 
       // Reference to the document
       DocumentReference documentReference =
-      _firestore.collection('MarkazStudents').doc(documentId);
+      _firestore.collection('AkhmedovStudents').doc(documentId);
 
       // Update the desired field
       print('Selected group Id ${selectedGroupId.value}');
@@ -200,7 +200,7 @@ class StudentController extends GetxController {
 
       // Reference to the document
       DocumentReference documentReference =
-      _firestore.collection('MarkazStudents').doc(documentId);
+      _firestore.collection('AkhmedovStudents').doc(documentId);
 
       // Update the desired field
       await documentReference.update({
@@ -223,7 +223,7 @@ class StudentController extends GetxController {
     // Function to update a specific document field by document ID
     try {
       isLoading.value = true;
-      // DocumentReference documentReference = FirebaseFirestore.instance.collection('MarkazStudents')
+      // DocumentReference documentReference = FirebaseFirestore.instance.collection('AkhmedovStudents')
       //     .doc(documentId);
       //
       // // Get the current document snapshot
@@ -253,7 +253,7 @@ class StudentController extends GetxController {
     isLoading.value = true;
     try {
       // Retrieve the document reference
-      DocumentReference documentReference = FirebaseFirestore.instance.collection('MarkazStudents')
+      DocumentReference documentReference = FirebaseFirestore.instance.collection('AkhmedovStudents')
           .doc(documentId);
 
       // Get the current document snapshot
@@ -322,8 +322,8 @@ class StudentController extends GetxController {
       isLoading.value = true;
 
       // Reference to the document
-      DocumentReference documentReference =  _firestore.collection('MarkazStudents').doc(documentId);
-      DocumentReference deletedStudents =  _firestore.collection('MarkazDeletedStudents').doc(documentId);
+      DocumentReference documentReference =  _firestore.collection('AkhmedovStudents').doc(documentId);
+      DocumentReference deletedStudents =  _firestore.collection('AkhmedovDeletedStudents').doc(documentId);
 
       // Update the desired field
       await documentReference.update({
@@ -360,7 +360,7 @@ class StudentController extends GetxController {
 
     // Query to find documents where the field equals the given value
     QuerySnapshot snapshot = await firestore
-        .collection('MarkazStudents') // Replace with your collection name
+        .collection('AkhmedovStudents') // Replace with your collection name
         .where('items.group', isEqualTo: 'Idiyevs (Group B)')
         .get();
 
@@ -417,7 +417,7 @@ class StudentController extends GetxController {
       try {
         // Retrieve the document reference
         DocumentReference documentReference = FirebaseFirestore.instance
-            .collection('MarkazStudents')
+            .collection('AkhmedovStudents')
             .doc(documentId);
 
         // Get the current document snapshot
@@ -489,7 +489,7 @@ class StudentController extends GetxController {
       try {
         // Retrieve the document reference
         DocumentReference documentReference = FirebaseFirestore.instance
-            .collection('MarkazStudents')
+            .collection('AkhmedovStudents')
             .doc(documentId);
 
         // Get the current document snapshot
@@ -552,7 +552,7 @@ class StudentController extends GetxController {
     try {
       // Retrieve the document reference
       DocumentReference documentReference = FirebaseFirestore.instance
-          .collection('MarkazStudents')
+          .collection('AkhmedovStudents')
           .doc(documentId);
 
       // Get the current document snapshot
@@ -608,7 +608,7 @@ class StudentController extends GetxController {
     try {
       // Retrieve the document reference
       DocumentReference documentReference = FirebaseFirestore.instance
-          .collection('MarkazStudents')
+          .collection('AkhmedovStudents')
           .doc(documentId);
 
       // Get the current document snapshot
@@ -683,7 +683,7 @@ class StudentController extends GetxController {
     try {
       // Retrieve the document reference
       DocumentReference documentReference = FirebaseFirestore.instance
-          .collection('MarkazStudents')
+          .collection('AkhmedovStudents')
           .doc(documentId);
 
       // Get the current document snapshot
@@ -746,7 +746,7 @@ class StudentController extends GetxController {
     try {
       // Retrieve the document reference
       DocumentReference documentReference = FirebaseFirestore.instance
-          .collection('MarkazStudents')
+          .collection('AkhmedovStudents')
           .doc(documentId);
 
       // Get the current document snapshot

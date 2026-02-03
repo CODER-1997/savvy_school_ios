@@ -28,7 +28,7 @@ class GradingStudents extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection('MarkazGrading')
+                .collection('AkhmedovGrading')
                 .where('items.group', isEqualTo: group)
                 .snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

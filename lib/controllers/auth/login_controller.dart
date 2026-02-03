@@ -27,7 +27,7 @@ class FireAuth extends GetxController {
     TeacherList.clear();
     try {
       QuerySnapshot snapshot =
-      await FirebaseFirestore.instance.collection('MarkazTeachers').get();
+      await FirebaseFirestore.instance.collection('AkhmedovTeachers').get();
       TeacherList.assignAll(snapshot.docs);
       isLoading.value = false;
       print("Teacher List ${TeacherList}");

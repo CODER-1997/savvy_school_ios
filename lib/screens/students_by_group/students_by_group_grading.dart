@@ -96,7 +96,7 @@ class Grading extends StatelessWidget {
           children: [
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('MarkazStudents')
+                    .collection('AkhmedovStudents')
                     .where('items.isDeleted', isEqualTo: false)
                     .where('items.groupId', isEqualTo: groupId)
                     .snapshots(),
