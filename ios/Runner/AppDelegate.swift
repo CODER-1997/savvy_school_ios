@@ -2,7 +2,7 @@ import UIKit
 import Flutter
 import MessageUI
 
-@UIApplicationMain
+@main
 @objc class AppDelegate: FlutterAppDelegate, MFMessageComposeViewControllerDelegate {
     private let channelName = "sms_service"
     var flutterResult: FlutterResult?
