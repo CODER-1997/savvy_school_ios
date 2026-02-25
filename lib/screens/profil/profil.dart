@@ -16,8 +16,6 @@ class Profil extends StatefulWidget {
 class _ProfilState extends State<Profil> {
   final box = GetStorage();
   final ImageUploader uploader = ImageUploader();
-
-  // Tanlangan oyni kuzatish (Default: Hozirgi oy)
   final RxString _selectedMonth = DateFormat('MMMM yyyy').format(DateTime.now()).obs;
 
   @override
@@ -52,9 +50,7 @@ class _ProfilState extends State<Profil> {
           List history = List.from(teacher['salaryHistory'] ?? []);
 
           return Obx(() {
-            // Tanlangan oy bo'yicha filterlash
             List monthlyDetails = history.where((item) => item['month'] == _selectedMonth.value).toList();
-
             num totalEarned = 0;
             num totalAdvance = 0;
 
@@ -69,15 +65,15 @@ class _ProfilState extends State<Profil> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 1. Profil Qismi
+                  // --- PROFIL RASMI VA ISM ---
                   _buildHeader(teacher, imgUrl),
                   const SizedBox(height: 25),
 
-                  // 2. Oy Tanlash
+                  // --- OY TANLASH ---
                   _buildMonthSelector(context),
                   const SizedBox(height: 20),
 
-                  // 3. Statistika Kartalari
+                  // --- STATISTIKA ---
                   Row(
                     children: [
                       _statCard("Ishlangan haq", totalEarned, CupertinoColors.activeGreen),
@@ -87,7 +83,7 @@ class _ProfilState extends State<Profil> {
                   ),
                   const SizedBox(height: 30),
 
-                  // 4. Batafsil Ro'yxat (Sababsiz, faqat turi va sanasi)
+                  // --- TO'LOVLAR RO'YXATI ---
                   const Text(
                     "TO'LOVLAR TARIXI",
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: CupertinoColors.secondaryLabel, letterSpacing: 0.5),
@@ -101,9 +97,7 @@ class _ProfilState extends State<Profil> {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: monthlyDetails.length,
-                      itemBuilder: (context, index) {
-                        return _buildTransactionItem(monthlyDetails[index]);
-                      },
+                      itemBuilder: (context, index) => _buildTransactionItem(monthlyDetails[index]),
                     ),
                   const SizedBox(height: 50),
                 ],
@@ -115,16 +109,37 @@ class _ProfilState extends State<Profil> {
     );
   }
 
-  // --- UI METODLARI ---
-
   Widget _buildHeader(Map teacher, dynamic imgUrl) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 35,
-          backgroundColor: Colors.white,
-          backgroundImage: (imgUrl != null && imgUrl != "") ? NetworkImage(imgUrl) : null,
-          child: (imgUrl == null || imgUrl == "") ? const Icon(CupertinoIcons.person, size: 30) : null,
+        Stack(
+          alignment: Alignment.bottomRight,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(2),
+              decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+              child: CircleAvatar(
+                radius: 40,
+                backgroundColor: CupertinoColors.systemGrey5,
+                backgroundImage: (imgUrl != null && imgUrl != "") ? NetworkImage(imgUrl) : null,
+                child: (imgUrl == null || imgUrl == "")
+                    ? Text((teacher['name'] ?? "T")[0].toUpperCase(), style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold))
+                    : null,
+              ),
+            ),
+            // Rasm yuklash tugmasi
+            Obx(() => uploader.isUploading.value
+                ? const CircleAvatar(radius: 12, backgroundColor: Colors.white, child: CupertinoActivityIndicator(radius: 8))
+                : GestureDetector(
+              onTap: () => uploader.uploadTeacherImage(box.read('teacherDocId')),
+              child: const CircleAvatar(
+                radius: 12,
+                backgroundColor: CupertinoColors.activeBlue,
+                child: Icon(CupertinoIcons.camera_fill, color: Colors.white, size: 12),
+              ),
+            ),
+            ),
+          ],
         ),
         const SizedBox(width: 15),
         Column(
@@ -132,7 +147,7 @@ class _ProfilState extends State<Profil> {
           children: [
             Text("${teacher['name'] ?? ''} ${teacher['surname'] ?? ''}",
                 style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text("Teacher ID: ${box.read('teacherId')}",
+            Text("ID: ${box.read('teacherId')}",
                 style: const TextStyle(color: Colors.grey, fontSize: 13, fontWeight: FontWeight.w500)),
           ],
         ),
@@ -155,12 +170,7 @@ class _ProfilState extends State<Profil> {
           children: [
             const Icon(CupertinoIcons.calendar, color: CupertinoColors.activeBlue, size: 22),
             const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                _selectedMonth.value,
-                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
-              ),
-            ),
+            Expanded(child: Text(_selectedMonth.value, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16))),
             const Icon(CupertinoIcons.chevron_down, color: Colors.grey, size: 16),
           ],
         ),
@@ -171,19 +181,14 @@ class _ProfilState extends State<Profil> {
   void _showMonthPicker(BuildContext context) {
     final List<String> months = [];
     DateTime now = DateTime.now();
-    for (int i = 0; i < 12; i++) {
-      months.add(DateFormat('MMMM yyyy').format(DateTime(now.year, now.month - i, 1)));
-    }
+    for (int i = 0; i < 12; i++) months.add(DateFormat('MMMM yyyy').format(DateTime(now.year, now.month - i, 1)));
 
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         padding: const EdgeInsets.all(20),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-        ),
+        decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -194,34 +199,16 @@ class _ProfilState extends State<Profil> {
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 2.2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: 2.2, mainAxisSpacing: 10, crossAxisSpacing: 10),
               itemCount: months.length,
               itemBuilder: (context, index) {
                 bool isSelected = _selectedMonth.value == months[index];
                 return GestureDetector(
-                  onTap: () {
-                    _selectedMonth.value = months[index];
-                    Navigator.pop(context);
-                  },
+                  onTap: () { _selectedMonth.value = months[index]; Navigator.pop(context); },
                   child: Container(
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: isSelected ? CupertinoColors.activeBlue : CupertinoColors.systemGrey6,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      months[index].split(' ')[0],
-                      style: TextStyle(
-                        color: isSelected ? Colors.white : Colors.black,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                        fontSize: 13,
-                      ),
-                    ),
+                    decoration: BoxDecoration(color: isSelected ? CupertinoColors.activeBlue : CupertinoColors.systemGrey6, borderRadius: BorderRadius.circular(12)),
+                    child: Text(months[index].split(' ')[0], style: TextStyle(color: isSelected ? Colors.white : Colors.black, fontWeight: isSelected ? FontWeight.bold : FontWeight.w500, fontSize: 13)),
                   ),
                 );
               },
@@ -237,20 +224,13 @@ class _ProfilState extends State<Profil> {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: color.withOpacity(0.1)),
-        ),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(18), border: Border.all(color: color.withOpacity(0.1))),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(label, style: const TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
-            Text(
-              NumberFormat('#,###').format(amount),
-              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: color),
-            ),
+            Text(NumberFormat('#,###').format(amount), style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: color)),
             const Text("UZS", style: TextStyle(fontSize: 9, color: Colors.grey, fontWeight: FontWeight.bold)),
           ],
         ),
@@ -263,41 +243,26 @@ class _ProfilState extends State<Profil> {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: (isSalary ? Colors.green : Colors.orange).withOpacity(0.1),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              isSalary ? CupertinoIcons.add_circled : CupertinoIcons.minus_circle,
-              color: isSalary ? Colors.green : Colors.orange,
-              size: 20,
-            ),
+            decoration: BoxDecoration(color: (isSalary ? Colors.green : Colors.orange).withOpacity(0.1), shape: BoxShape.circle),
+            child: Icon(isSalary ? CupertinoIcons.add_circled : CupertinoIcons.minus_circle, color: isSalary ? Colors.green : Colors.orange, size: 20),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Reason olib tashlandi, o'rniga turi chiqadi
-                Text(isSalary ? "Ish haqi" : "Avans to'lovi",
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                Text(isSalary ? "Ish haqi" : "Avans to'lovi", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                 const SizedBox(height: 2),
                 Text(item['date'] ?? "", style: const TextStyle(color: Colors.grey, fontSize: 12)),
               ],
             ),
           ),
-          Text(
-            "${isSalary ? '+' : '-'}${NumberFormat('#,###').format(item['amount'])}",
-            style: TextStyle(fontWeight: FontWeight.w800, color: isSalary ? Colors.green : Colors.orange, fontSize: 15),
-          ),
+          Text("${isSalary ? '+' : '-'}${NumberFormat('#,###').format(item['amount'])}", style: TextStyle(fontWeight: FontWeight.w800, color: isSalary ? Colors.green : Colors.orange, fontSize: 15)),
         ],
       ),
     );
