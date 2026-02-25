@@ -73,7 +73,7 @@ class _ProfilState extends State<Profil> {
                   _buildHeader(teacher, imgUrl),
                   const SizedBox(height: 25),
 
-                  // 2. Oy Tanlash (Soddalashtirilgan Tugma)
+                  // 2. Oy Tanlash
                   _buildMonthSelector(context),
                   const SizedBox(height: 20),
 
@@ -87,9 +87,9 @@ class _ProfilState extends State<Profil> {
                   ),
                   const SizedBox(height: 30),
 
-                  // 4. Batafsil Ro'yxat
+                  // 4. Batafsil Ro'yxat (Sababsiz, faqat turi va sanasi)
                   const Text(
-                    "OYLIK TAFSILOTLARI",
+                    "TO'LOVLAR TARIXI",
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: CupertinoColors.secondaryLabel, letterSpacing: 0.5),
                   ),
                   const SizedBox(height: 12),
@@ -215,7 +215,7 @@ class _ProfilState extends State<Profil> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
-                      months[index].split(' ')[0], // Faqat oy nomi (masalan: Fevral)
+                      months[index].split(' ')[0],
                       style: TextStyle(
                         color: isSelected ? Colors.white : Colors.black,
                         fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
@@ -286,7 +286,9 @@ class _ProfilState extends State<Profil> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(item['reason'] ?? "Noma'lum", style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                // Reason olib tashlandi, o'rniga turi chiqadi
+                Text(isSalary ? "Ish haqi" : "Avans to'lovi",
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
                 const SizedBox(height: 2),
                 Text(item['date'] ?? "", style: const TextStyle(color: Colors.grey, fontSize: 12)),
               ],
@@ -308,7 +310,7 @@ class _ProfilState extends State<Profil> {
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
       child: Column(
         children: [
-          Icon(CupertinoIcons. tray, color: Colors.grey.shade300, size: 50),
+          Icon(CupertinoIcons.tray, color: Colors.grey.shade300, size: 50),
           const SizedBox(height: 10),
           const Text("Ushbu oy uchun ma'lumot yo'q", style: TextStyle(color: Colors.grey, fontSize: 14)),
         ],
