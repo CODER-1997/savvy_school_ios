@@ -189,7 +189,7 @@ class StudentController extends GetxController {
   }
 
 
-  void addNewFeature(String documentId , String groupName ) async {
+  void addNewFeature(String documentId ) async {
     isLoading.value = true;
 
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -203,8 +203,9 @@ class StudentController extends GetxController {
       _firestore.collection('AkhmedovStudents').doc(documentId);
 
       // Update the desired field
+      print('Selected group Id ${selectedGroupId.value}');
       await documentReference.update({
-        'items.group': groupName,
+        'items.exams': [],
       });
 
     } catch (e) {
@@ -215,7 +216,7 @@ class StudentController extends GetxController {
   }
 
 
-  void recoverStudentItem(String documentId) async {
+  void recoverStudentItem(String documentId,String groupName) async {
     isLoading.value = true;
 
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -223,21 +224,16 @@ class StudentController extends GetxController {
     // Function to update a specific document field by document ID
     try {
       isLoading.value = true;
-      // DocumentReference documentReference = FirebaseFirestore.instance.collection('AkhmedovStudents')
-      //     .doc(documentId);
-      //
-      // // Get the current document snapshot
-      // DocumentSnapshot documentSnapshot = await documentReference.get();
-      // Map<String, dynamic> currentMap =
-      // Map<String, dynamic>.from(documentSnapshot['items'] ?? {});
-      // // Get the current array field value
-      // List<dynamic> currentArray =
-      // List<dynamic>.from(currentMap['studyDays'] ?? []);
 
+      // Reference to the document
+      DocumentReference documentReference =
+      _firestore.collection('AkhmedovStudents').doc(documentId);
 
-
-
-
+      // Update the desired field
+      print('Selected group Id ${selectedGroupId.value}');
+      await documentReference.update({
+        'items.group': groupName,
+      });
       isLoading.value = false;
       paidDate.value = '';
     } catch (e) {
@@ -249,7 +245,7 @@ class StudentController extends GetxController {
 
 
   void removeStudyDay(String documentId, String groupId, String studentId,
-      ) async {
+      Map hasReason, bool isAttended,) async {
     isLoading.value = true;
     try {
       // Retrieve the document reference
@@ -339,6 +335,29 @@ class StudentController extends GetxController {
     isLoading.value = false;
   }
 
+  void revoverGroupId(String documentId , String groupId) async {
+    isLoading.value = true;
+
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    // Function to update a specific document field by document ID
+    try {
+      isLoading.value = true;
+
+      // Reference to the document
+      DocumentReference documentReference =  _firestore.collection('AkhmedovStudents').doc(documentId);
+
+      // Update the desired field
+      await documentReference.update({
+        'items.groupId': groupId,
+      });
+      isLoading.value = false;
+    } catch (e) {
+      print('Error updating document field: $e');
+      isLoading.value = false;
+    }
+    isLoading.value = false;
+  }
 
   // Calculate payment
 
@@ -603,7 +622,7 @@ class StudentController extends GetxController {
   // Check student study inteval by ..
 
   void setStudyDay(String documentId, String groupId, String studentId,
-      String attendance) async {
+      Map hasReason, bool isAttended,) async {
     isLoading.value = true;
     try {
       // Retrieve the document reference
@@ -637,14 +656,16 @@ class StudentController extends GetxController {
           'studyDay': selectedStudyDate.value,
           'groupId': groupId,
           'studentId': studentId,
-          'attendance':attendance
+          'hasReason': hasReason,
+          'isAttended': isAttended
         });
       } else {
         currentArray[index] = {
           'studyDay': selectedStudyDate.value,
           'groupId': groupId,
           'studentId': studentId,
-          'attendance':attendance
+          'hasReason': hasReason,
+          'isAttended': isAttended
         };
       }
 
@@ -803,6 +824,54 @@ class StudentController extends GetxController {
       );
     }
   }
+  void deleteStudentPermanently(String documentId) async {
+    isLoading.value = true;
 
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    // Function to update a specific document field by document ID
+    try {
+      isLoading.value = true;
+
+      // Reference to the document
+      DocumentReference documentReference =
+      _firestore.collection('AkhmedovStudents').doc(documentId);
+
+      // Update the desired field
+      await documentReference.delete();
+      print('Deleted succesfully');
+      isLoading.value = false;
+    } catch (e) {
+      print('Error updating document field: $e');
+      isLoading.value = false;
+    }
+    isLoading.value = false;
+  }
+  void recoverStudent(String documentId) async {
+    isLoading.value = true;
+
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    // Function to update a specific document field by document ID
+    try {
+      isLoading.value = true;
+
+      // Reference to the document
+      DocumentReference documentReference =
+      _firestore.collection('AkhmedovStudents').doc(documentId);
+
+      // Update the desired field
+      await documentReference.update({
+        'items.isDeleted': false,
+      });
+      print('Deleted succesfully');
+      Get.back();
+      isLoading.value = false;
+    } catch (e) {
+      print('Error updating document field: $e');
+      isLoading.value = false;
+    }
+    isLoading.value = false;
+  }
 // Edit payment
 }

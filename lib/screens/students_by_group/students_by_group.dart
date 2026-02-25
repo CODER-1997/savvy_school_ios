@@ -1,4 +1,4 @@
- import 'package:savvy_school_ios/screens/students_by_group/attendance/students_by_group_attendance.dart';
+ import 'package:savvy_school_ios/screens/students_by_group/students_by_group_attendance.dart';
  import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,8 +9,7 @@ import 'package:lottie/lottie.dart';
 import '../../constants/text_styles.dart';
 import '../../constants/theme.dart';
 import '../../controllers/students/student_controller.dart';
-import 'additional_funcs/add_student.dart';
-import 'exams.dart';
+ import 'exams.dart';
 
 class StudentsByGroup extends StatefulWidget {
   final String groupId;
@@ -19,7 +18,7 @@ class StudentsByGroup extends StatefulWidget {
   StudentsByGroup({
     required this.groupId,
     required this.groupName,
-  });
+   });
 
   @override
   State<StudentsByGroup> createState() => _StudentsByGroupState();
@@ -54,6 +53,8 @@ class _StudentsByGroupState extends State<StudentsByGroup>
     return Scaffold(
       backgroundColor: Color(0xffe8e8e8),
       appBar: AppBar(
+        leading: IconButton(onPressed: Get.back, icon: Icon(Icons.arrow_back,color: Colors.white,)),
+
         actions: [
           Row(
             children: [
@@ -79,10 +80,7 @@ class _StudentsByGroupState extends State<StudentsByGroup>
               SizedBox(
                 width: 16,
               ),
-              // AddStudent(
-              //   groupName: widget.groupName,
-              //   groupId: widget.groupId,
-              // ),
+
               SizedBox(
                 width: 8,
               )
@@ -149,6 +147,7 @@ class _StudentsByGroupState extends State<StudentsByGroup>
           Attendance(
             groupId: widget.groupId,
             groupName: widget.groupName,
+
           ),
           Exams(
             group: widget.groupName,

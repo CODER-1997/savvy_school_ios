@@ -13,7 +13,6 @@ import 'package:screenshot/screenshot.dart';
  import '../../constants/custom_widgets/gradient_button.dart';
 import '../../constants/form_field.dart';
 
-import '../../constants/text_styles.dart';
 import '../../controllers/exams/exams_controller.dart';
 import '../../controllers/students/student_controller.dart';
 
@@ -57,7 +56,6 @@ class _ExamResultsState extends State<ExamResults> {
     }
     return hasTaken;
   }
-  RxBool saved = false.obs;
 
   PdfColor getColor(double num) {
     if (num > 85) {
@@ -98,16 +96,6 @@ class _ExamResultsState extends State<ExamResults> {
   ExamsController examsController = Get.put(ExamsController());
   ScreenshotController screenshotController = ScreenshotController();
 
-
-  @override
-  void initState() {
-    saved.value = box.read(widget.examDate) ?? false;
-    super.initState();
-  }
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,8 +106,6 @@ class _ExamResultsState extends State<ExamResults> {
           IconButton(
               onPressed: () {
                 isEdit.value = !isEdit.value;
-                saved.value = false;
-
               },
               icon: Icon(Icons.edit)),
           SizedBox(
@@ -327,8 +313,8 @@ class _ExamResultsState extends State<ExamResults> {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Obx(() => saved.value == false || box.read(widget.examDate) == false
-                ? InkWell(
+            Expanded(
+              child: InkWell(
                 onTap: () {
                   for (int i = 0; i < studentExams.length; i++) {
                     if (isAlreadyTakenExam(studentExams[i]['exams'])) {
@@ -340,6 +326,7 @@ class _ExamResultsState extends State<ExamResults> {
                           widget.examTitle,
                           widget.examDate);
                     } else {
+                      print('also working ... ');
                       studentController.addExam(
                           studentExams[i]['id'],
                           widget.examDate,
@@ -352,172 +339,122 @@ class _ExamResultsState extends State<ExamResults> {
                   }
                   isEdit.value = false;
                   // And send telegram on pdf format  ...
+                  List _students = [];
+                  for (var item in students) {
+                    int currentExamResult = 0;
+                    for (var exam in item['exams']) {
+                      if (exam['examDate'] == widget.examDate) {
+                        currentExamResult = exam['howMany'].toString().isEmpty
+                            ? 0
+                            : int.parse(exam['howMany']);
+                        break;
+                      }
+                    }
+                    _students.add({
+                      'order': "",
+                      'name': item['name'],
+                      'surname': item['surname'],
+                      'grade': currentExamResult,
+                      "questionCount": widget.examCount,
+                      'percent': double.parse(
+                          ((currentExamResult / int.parse(widget.examCount)) *
+                              100)
+                              .toStringAsFixed(2)),
+                      'color': getColor(double.parse(
+                          ((currentExamResult / int.parse(widget.examCount)) *
+                              100)
+                              .toStringAsFixed(2)))
+                    });
+                  }
+                  _students
+                      .sort((a, b) => b['percent'].compareTo(a['percent']));
+                  for (int i = 0; i < _students.length; i++) {
+                    _students[i]['order'] = i + 1;
+                  }
 
-                  Future.delayed(Duration(seconds: 3));
-                  saved.value = true;
-                  box.write(widget.examDate, saved.value);
+                  print("AAA" + _students.toString());
+
+                  examsController.createPdfAndNotify(_students,
+                      "${widget.groupName} guruhi ${widget.examTitle} imtihoni natijalari");
                 },
-                child: Container(
-                    alignment: Alignment.center,
-                    height: 48,
-                    width: Get.width - 16,
-                    decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(12)),
-                    child: Text(
-                      'saqlash',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    )))
-                : Expanded(
-              child: Row(
-                children: [
-
-                  Expanded(
-                      child: InkWell(
-                          onTap: () async {
-                            for (int i = 0; i < studentExams.length; i++) {
-                              if (isAlreadyTakenExam(studentExams[i]['exams'])) {
-                                studentController.editExam(
-                                    studentExams[i]['id'],
-                                    examId(studentExams[i]['exams']),
-                                    widget.examCount,
-                                    studentExams[i]['count'],
-                                    widget.examTitle,
-                                    widget.examDate);
-                              } else {
-                                print('also working ... ');
-                                studentController.addExam(
-                                    studentExams[i]['id'],
-                                    widget.examDate,
-                                    widget.examCount,
-                                    studentExams[i]['count'],
-                                    widget.examTitle);
-                              }
-
-                              Future.delayed(Duration(milliseconds: 111));
-                            }
-                            isEdit.value = false;
-                            // And send telegram on pdf format  ...
-                            List _students = [];
-                            for (var item in students) {
-                              int currentExamResult = 0;
-                              for (var exam in item['exams']) {
-                                if (exam['examDate'] == widget.examDate) {
-                                  currentExamResult = exam['howMany'].toString().isEmpty
-                                      ? 0
-                                      : int.parse(exam['howMany']);
-                                  break;
-                                }
-                              }
-
-                              _students.add({
-                                'order': "",
-                                'name': item['name'],
-                                'surname': item['surname'],
-                                'grade': currentExamResult,
-                                "questionCount": widget.examCount,
-                                'percent': double.parse(
-                                    ((currentExamResult / int.parse(widget.examCount)) *
-                                        100)
-                                        .toStringAsFixed(2)),
-                                'color': getColor(double.parse(
-                                    ((currentExamResult / int.parse(widget.examCount)) *
-                                        100)
-                                        .toStringAsFixed(2)))
-                              });
-                            }
-                            _students
-                                .sort((a, b) => b['percent'].compareTo(a['percent']));
-                            for (int i = 0; i < _students.length; i++) {
-                              _students[i]['order'] = i + 1;
-                            }
-
-
-                            examProcess.value = false;
-
-                            Get.to(ExamResultsAsImg(examResults: _students));
-                          },
-                          child:  CustomButton(text:  "Rasm")))  ,
-                  SizedBox(width: 16,),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        for (int i = 0; i < studentExams.length; i++) {
-                          if (isAlreadyTakenExam(studentExams[i]['exams'])) {
-                            studentController.editExam(
-                                studentExams[i]['id'],
-                                examId(studentExams[i]['exams']),
-                                widget.examCount,
-                                studentExams[i]['count'],
-                                widget.examTitle,
-                                widget.examDate);
-                          } else {
-                            print('also working ... ');
-                            studentController.addExam(
-                                studentExams[i]['id'],
-                                widget.examDate,
-                                widget.examCount,
-                                studentExams[i]['count'],
-                                widget.examTitle);
-                          }
-
-                          Future.delayed(Duration(milliseconds: 111));
-                        }
-                        isEdit.value = false;
-                        // And send telegram on pdf format  ...
-                        List _students = [];
-                        for (var item in students) {
-                          int currentExamResult = 0;
-                          for (var exam in item['exams']) {
-                            if (exam['examDate'] == widget.examDate) {
-                              currentExamResult = exam['howMany'].toString().isEmpty
-                                  ? 0
-                                  : int.parse(exam['howMany']);
-                              break;
-                            }
-                          }
-                          _students.add({
-                            'order': "",
-                            'name': item['name'],
-                            'surname': item['surname'],
-                            'grade': currentExamResult,
-                            "questionCount": widget.examCount,
-                            'percent': double.parse(
-                                ((currentExamResult / int.parse(widget.examCount)) *
-                                    100)
-                                    .toStringAsFixed(2)),
-                            'color': getColor(double.parse(
-                                ((currentExamResult / int.parse(widget.examCount)) *
-                                    100)
-                                    .toStringAsFixed(2)))
-                          });
-                        }
-                        _students
-                            .sort((a, b) => b['percent'].compareTo(a['percent']));
-                        for (int i = 0; i < _students.length; i++) {
-                          _students[i]['order'] = i + 1;
-                        }
-
-                        print("AAA" + _students.toString());
-
-                        examsController.createPdfAndNotify(_students,
-                            "${widget.groupName} guruhi ${widget.examTitle} imtihoni natijalari");
-                      },
-                      child:   CustomButton(
-                        text:  "Pdf ",
-                        color: Colors.green,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-
-                ],
+                child: Obx(() => CustomButton(
+                  text: examsController.createPdf.value ||
+                      studentController.isLoading.value
+                      ? "Pdf tayyorlanmoqda"
+                      : "Pdf Ko'rinishida",
+                  color: Colors.green,
+                )),
               ),
             ),
+            SizedBox(
+              width: 4,
             ),
+            Expanded(
+                child: InkWell(
+                    onTap: () async {
+                      for (int i = 0; i < studentExams.length; i++) {
+                        if (isAlreadyTakenExam(studentExams[i]['exams'])) {
+                          studentController.editExam(
+                              studentExams[i]['id'],
+                              examId(studentExams[i]['exams']),
+                              widget.examCount,
+                              studentExams[i]['count'],
+                              widget.examTitle,
+                              widget.examDate);
+                        } else {
+                          print('also working ... ');
+                          studentController.addExam(
+                              studentExams[i]['id'],
+                              widget.examDate,
+                              widget.examCount,
+                              studentExams[i]['count'],
+                              widget.examTitle);
+                        }
 
+                        Future.delayed(Duration(milliseconds: 111));
+                      }
+                      isEdit.value = false;
+                      // And send telegram on pdf format  ...
+                      List _students = [];
+                      for (var item in students) {
+                        int currentExamResult = 0;
+                        for (var exam in item['exams']) {
+                          if (exam['examDate'] == widget.examDate) {
+                            currentExamResult = exam['howMany'].toString().isEmpty
+                                ? 0
+                                : int.parse(exam['howMany']);
+                            break;
+                          }
+                        }
+
+                        _students.add({
+                          'order': "",
+                          'name': item['name'],
+                          'surname': item['surname'],
+                          'grade': currentExamResult,
+                          "questionCount": widget.examCount,
+                          'percent': double.parse(
+                              ((currentExamResult / int.parse(widget.examCount)) *
+                                  100)
+                                  .toStringAsFixed(2)),
+                          'color': getColor(double.parse(
+                              ((currentExamResult / int.parse(widget.examCount)) *
+                                  100)
+                                  .toStringAsFixed(2)))
+                        });
+                      }
+                      _students
+                          .sort((a, b) => b['percent'].compareTo(a['percent']));
+                      for (int i = 0; i < _students.length; i++) {
+                        _students[i]['order'] = i + 1;
+                      }
+
+
+                      examProcess.value = false;
+
+                      Get.to(ExamResultsAsImg(examResults: _students));
+                    },
+                    child: Obx(()=>CustomButton(text: examProcess.value ? "Tayyorlanyapti":"Rasm ko'rinishida"))))
           ],
         ),
       ),

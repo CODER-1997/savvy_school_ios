@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 
@@ -65,11 +62,11 @@ bool hasDebt(List paidMonths) {
   }
 
 
-    if (currentMonthPaid) {
-      debtStatus = false;
-    } else {
-      debtStatus = true;
-    }
+  if (currentMonthPaid) {
+    debtStatus = false;
+  } else {
+    debtStatus = true;
+  }
 
 
   return debtStatus;
@@ -88,11 +85,11 @@ bool hasDebtFromMonth(List paidMonths,String month) {
     }
   }
 
-    if (currentMonthPaid== true) {
-      debtStatus = false;
-    } else {
-      debtStatus = true;
-    }
+  if (currentMonthPaid== true) {
+    debtStatus = false;
+  } else {
+    debtStatus = true;
+  }
 
 
   return debtStatus;
@@ -135,42 +132,17 @@ String checkStatus(List studyDays, String day) {
   if (isChecked == false) {
     return status = "notChecked";
   } else {
-
-
     if (studyDays[index]['studyDay']  == day.toString() &&
-        studyDays[index]['attendance'] ==  '2') {
-        status = '2';
+        studyDays[index]['isAttended'] == true &&
+        studyDays[index]['hasReason']['commentary'] == "" &&
+        studyDays[index]['hasReason']['hasReason'] == false) {
+      status = 'true';
+    } else {
+      status = 'false';
     }
-    if (studyDays[index]['studyDay']  == day.toString() &&
-        studyDays[index]['attendance'] ==  '1') {
-      status = '1';
-    } if (studyDays[index]['studyDay']  == day.toString() &&
-        studyDays[index]['attendance'] ==  '-1') {
-      status = '-1';
-    }
-
-
-
   }
   return status;
 }
-
-
- Color colorByAttendance(String attendance){
-    Color color = Colors.red;
-    if(attendance =='2') return color =Colors.green;
-    if(attendance =='1') return color =Colors.orange;
-
-
-
-    return color;
-
-
-
- }
-
-
-
 
 String getGroupNameById(List list, String groupId) {
   print(list);
@@ -265,15 +237,9 @@ List calculateUnpaidMonths(List studyDays,List payments){
   var shouldPay=[];
 
   for(int i = 0;i < studyDays.length;i++){
-     if(studyDays[i]['attendance']!='-1'){
-
-       if(!studyMonths.contains(convertDateToMonthYear(studyDays[i]['studyDay']))            ){
-         studyMonths.add(convertDateToMonthYear(studyDays[i]['studyDay']));
-       }
-
-     }
-
-
+    if(!studyMonths.contains(convertDateToMonthYear(studyDays[i]['studyDay']))){
+      studyMonths.add(convertDateToMonthYear(studyDays[i]['studyDay']));
+    }
   }
   for(int i = 0;i < payments.length;i++){
     if(!paidMonths.contains(convertDateToMonthYear(payments[i]['paidDate']))){
@@ -299,7 +265,7 @@ List calculateUnpaidMonths(List studyDays,List payments){
 List<String> generateMonthsList() {
   List<String> months = [];
   DateTime now = DateTime.now();
-  DateTime start = DateTime(2025, 10);
+  DateTime start = DateTime(2024, 8);
 
   while (start.isBefore(DateTime(now.year, now.month + 1))) {
     String monthName = '${_monthName(start.month)}, ${start.year}';
